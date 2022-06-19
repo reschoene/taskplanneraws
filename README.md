@@ -8,7 +8,10 @@ A simple task planner API for listing tasks grouped by lists and managing them
 - AWS Lambda, AWS API Gateway, AWS Dynamodb
 - AWS SAM CLI (for local testing and AWS Deploy): SAM = Serverless Application Model
 
-## Building and deploying native executable
+# Build and Deploy 
+There are two deploy options available: JVM and native executables. Bellow are the instructions for each one
+
+## Option 1 - Building and deploying native executable
 
 ### Creating a native executable
 You can create a native executable using:
@@ -28,7 +31,7 @@ Or, if you don't have GraalVM installed, you can run the native executable build
  - To deploy to AWS Lambda:
 `sam deploy -t build/sam.native.yaml -g`
 
-## Building and deploying JVM executable
+## Option 2 - Building and deploying JVM executable
 
 ### Creating a JVM executable
 You can create a native executable using:
