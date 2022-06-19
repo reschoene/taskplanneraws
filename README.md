@@ -1,8 +1,12 @@
 # TaskPlanner for AWS
+A simple task planner API for listing tasks grouped by lists and managing them
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
-
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Stack
+- Kotlin, Java with GraalVM (for native compilation)
+- Quarkus, the Supersonic Subatomic Java Framework.
+- RESTEasy, RESTAssured
+- AWS Lambda, AWS API Gateway, AWS Dynamodb
+- AWS SAM CLI (for local testing and AWS Deploy): SAM = Serverless Application Model
 
 ## Building and deploying native executable
 
