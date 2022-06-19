@@ -39,14 +39,15 @@ You can create a native executable using:
 ./gradlew build
 ```
 
-### Deploying a native executable
+### Deploying a JVM executable
 - You can then test the executable locally with sam local
   `sam local start-api --template build/sam.jvm.yaml`
 
 - To deploy to AWS Lambda:
   `sam deploy -t build/sam.jvm.yaml -g`
 
-### deploy throubleshooting
+
+## Deploy error tips
 If you get an error similar to this one: "An error occurred (SignatureDoesNotMatch) when calling the CreateChangeSet operation: Signature expired: 20220619T193119Z is now earlier than 20220619T193604Z (20220619T194104Z - 5 min.)"
 run following command to sync your PC date and time: 
 ```shell script
@@ -54,9 +55,8 @@ sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -
 ```
 
 
-## Running the application in dev mode
-
-You can run your application in dev mode that enables live coding using:
+# Running the application in dev mode
+As this is a quarkus application, you can run it using its developer mode that enables live coding using:
 ```shell script
 ./gradlew quarkusDev
 ```
