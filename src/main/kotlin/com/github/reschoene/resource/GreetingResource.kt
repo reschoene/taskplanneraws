@@ -1,4 +1,4 @@
-package com.github.reschoene
+package com.github.reschoene.resource
 
 import javax.ws.rs.GET
 import javax.ws.rs.Path

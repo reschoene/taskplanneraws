@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "0c3eaf34-2e7b-40d4-aa70-5e4ff0e12e78",
+		"name": "TaskPlannerAWS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TaskLists - get all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasklists/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasklists",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TaskLists -  get by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasklists/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasklists",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TaskLists - delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasklists/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasklists",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TaskLists - update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3,\n    \"name\": \"renato!!!\",\n    \"description\": \"lista d mercado2222\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasklists",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasklists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TaskLists - create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 5,\n    \"name\": \"s lista\",\n    \"description\": \"lista d mercado\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasklists",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasklists"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

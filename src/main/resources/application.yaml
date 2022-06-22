@@ -1,0 +1,17 @@
+"%dev":
+  quarkus:
+    dynamodb:
+      endpoint-override: http://localhost:8000
+  aws:
+    region: sa-east-1
+    credentials:
+      type: static
+      static-provider:
+        access-key: test-key
+        secret-access-key: test-secret
+
+"%prod":
+  aws:
+    region: sa-east-1
+    credentials:
+      type: default
