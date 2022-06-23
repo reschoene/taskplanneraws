@@ -12,7 +12,7 @@ import javax.ws.rs.Path
 import javax.ws.rs.PathParam
 
 
-@Path("/tasklists")
+@Path("/task-lists")
 class TaskListResourceResource {
     private val logger = KotlinLogging.logger {}
 
