@@ -6,19 +6,57 @@
 	},
 	"item": [
 		{
-			"name": "TaskLists - get all",
+			"name": "get OpenAPI",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/task-lists",
+					"raw": "http://localhost:8080/tasklist",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"task-lists"
+						"tasklist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test endpoint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasklist",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasklist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TaskLists - get all Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasklist",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasklist"
 					]
 				}
 			},
@@ -30,15 +68,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/task-lists/5",
+					"raw": "http://localhost:8080/tasklist/563eecfc-bb67-44fc-972b-19e434b01c93",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"task-lists",
-						"5"
+						"tasklist",
+						"563eecfc-bb67-44fc-972b-19e434b01c93"
 					]
 				}
 			},
@@ -50,15 +88,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/task-lists/5",
+					"raw": "http://localhost:8080/tasklist/dc3942bf-e0bf-499b-855a-fafa75f941ae",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"task-lists",
-						"5"
+						"tasklist",
+						"dc3942bf-e0bf-499b-855a-fafa75f941ae"
 					]
 				}
 			},
@@ -71,7 +109,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 3,\n    \"name\": \"renato!!!\",\n    \"description\": \"lista d mercado2222\"\n}",
+					"raw": "{\n    \"name\": \"renato s!!!\",\n    \"description\": \"lista d mercado2222\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -79,14 +117,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/task-lists",
+					"raw": "http://localhost:8080/tasklist/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"task-lists"
+						"tasklist",
+						"3"
 					]
 				}
 			},
@@ -99,7 +138,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 5,\n    \"name\": \"s lista\",\n    \"description\": \"lista d mercado\"\n}",
+					"raw": "{\n    \"name\": \"s listasss\",\n    \"description\": \"lista d mercado\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -107,14 +146,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/task-lists",
+					"raw": "http://localhost:8080/tasklist",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"task-lists"
+						"tasklist"
 					]
 				}
 			},
