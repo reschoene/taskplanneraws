@@ -39,14 +39,13 @@ class TaskListDao : DynamoDBDao("TaskLists") {
     }
 
     private fun toTaskList(item: Map<String, AttributeValue>?): TaskList?{
-        var taskList: TaskList? = null
-
-        if (item != null && item.isNotEmpty()) {
-            taskList = TaskList()
-            taskList.id = item[idCol]?.s() ?: ""
-            taskList.name = item[nameCol]?.s() ?: ""
-            taskList.description = item[descriptionCol]?.s() ?: ""
-        }
-        return taskList
+        return item?.takeIf { it.isNotEmpty() }
+                   ?.let {
+                        TaskList().apply {
+                            this.id = item.getStrAttributeValue(idCol)
+                            this.name = item.getStrAttributeValue(nameCol)
+                            this.description = item.getStrAttributeValue(descriptionCol)
+                        }
+                   }
     }
 }

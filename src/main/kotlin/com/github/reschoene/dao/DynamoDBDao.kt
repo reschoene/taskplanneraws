@@ -54,4 +54,6 @@ abstract class DynamoDBDao (private val tableName: String){
 
     protected fun strAttributeValue(value: String?): AttributeValue =
         AttributeValue.builder().s(value).build()
+
+    protected fun Map<String, AttributeValue>.getStrAttributeValue(colName: String) = get(colName)?.s() ?: ""
 }
