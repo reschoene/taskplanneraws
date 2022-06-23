@@ -3,7 +3,6 @@ package com.github.reschoene.dao
 import software.amazon.awssdk.core.pagination.sync.SdkIterable
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient
 import software.amazon.awssdk.services.dynamodb.model.*
-import javax.enterprise.context.ApplicationScoped
 import javax.inject.Inject
 
 abstract class DynamoDBDao (private val tableName: String){
@@ -18,8 +17,7 @@ abstract class DynamoDBDao (private val tableName: String){
     }
 
     protected fun getById(idColName: String, idValue: String?, attributesToGet: List<String>): MutableMap<String, AttributeValue>? {
-        val key = mutableMapOf<String, AttributeValue>()
-        key[idColName] = strAttributeValue(idValue)
+        val key = mapOf(idColName to strAttributeValue(idValue))
 
         val getItemRequest = GetItemRequest.builder()
             .tableName(tableName)
@@ -42,8 +40,7 @@ abstract class DynamoDBDao (private val tableName: String){
     }
 
     protected fun delete(idColName: String, idValue: String?): MutableMap<String, AttributeValue>? {
-        val item = mutableMapOf<String, AttributeValue>()
-        item[idColName] = strAttributeValue(idValue)
+        val item = mapOf(idColName to strAttributeValue(idValue))
 
         val deleteItem = dynamoDB.deleteItem(
             DeleteItemRequest.builder()

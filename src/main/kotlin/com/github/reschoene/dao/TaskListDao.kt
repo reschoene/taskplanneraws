@@ -3,7 +3,6 @@ package com.github.reschoene.dao
 import com.github.reschoene.model.TaskList
 import mu.KotlinLogging
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue
-import java.util.stream.Collectors
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
@@ -16,10 +15,7 @@ class TaskListDao : DynamoDBDao("TaskLists") {
     private val logger = KotlinLogging.logger {}
 
     fun findAll(): List<TaskList?> {
-        return super.findAll(attributesToGet)
-            .stream()
-            .map(this::toTaskList)
-            .collect(Collectors.toList())
+        return super.findAll(attributesToGet).map(this::toTaskList)
     }
 
     fun getById(id: String?): TaskList? {
@@ -29,10 +25,11 @@ class TaskListDao : DynamoDBDao("TaskLists") {
     fun createOrUpdate(taskList: TaskList): TaskList? {
         logger.info("taskList to create: $taskList")
 
-        val item = mutableMapOf<String, AttributeValue>()
-        item[idCol] = strAttributeValue(taskList.id)
-        item[nameCol] = strAttributeValue(taskList.name)
-        item[descriptionCol] = strAttributeValue(taskList.description)
+        val item = mapOf(
+            idCol to strAttributeValue(taskList.id),
+            nameCol to strAttributeValue(taskList.name),
+            descriptionCol to strAttributeValue(taskList.description)
+        )
 
         return toTaskList(super.createOrUpdate(item))
     }

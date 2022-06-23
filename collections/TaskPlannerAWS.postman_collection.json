@@ -11,15 +11,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/tasklists/",
+					"raw": "http://localhost:8080/task-lists",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"tasklists",
-						""
+						"task-lists"
 					]
 				}
 			},
@@ -31,15 +30,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/tasklists/3",
+					"raw": "http://localhost:8080/task-lists/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"tasklists",
-						"3"
+						"task-lists",
+						"5"
 					]
 				}
 			},
@@ -51,14 +50,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/tasklists/5",
+					"raw": "http://localhost:8080/task-lists/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"tasklists",
+						"task-lists",
 						"5"
 					]
 				}
@@ -80,14 +79,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/tasklists",
+					"raw": "http://localhost:8080/task-lists",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"tasklists"
+						"task-lists"
 					]
 				}
 			},
@@ -108,14 +107,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/tasklists",
+					"raw": "http://localhost:8080/task-lists",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"tasklists"
+						"task-lists"
 					]
 				}
 			},
