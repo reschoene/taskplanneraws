@@ -5,10 +5,10 @@ import com.github.reschoene.model.TaskList
 import mu.KotlinLogging
 import javax.inject.Inject
 import javax.ws.rs.*
-
+import javax.ws.rs.core.Response
 
 @Path("/tasklist")
-class TaskListResourceResource {
+class TaskListResourceResource : BaseResource() {
     private val logger = KotlinLogging.logger {}
 
     @Inject
@@ -16,41 +16,41 @@ class TaskListResourceResource {
 
     @GET
     @Produces("application/json")
-    fun getAll(): List<TaskList?> {
+    fun getAll(): Response{
         logger.info("before get all")
-        return daoService.findAll()
+        return buildSearchResponse(daoService.findAll())
     }
 
     @GET
     @Path("{id}")
     @Produces("application/json")
-    fun get(@PathParam("id")id: String): TaskList? {
+    fun get(@PathParam("id")id: String): Response {
         logger.info("chegou id = $id")
-        return daoService.getById(id)
+        return buildSearchResponse(daoService.getById(id))
     }
 
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    fun add(taskList: TaskList): TaskList? {
+    fun add(taskList: TaskList): Response {
         logger.info("chegou taskList = $taskList")
-        return daoService.create(taskList)
+        return buildCreateResponse(daoService.create(taskList))
     }
 
     @PUT
     @Path("{id}")
     @Consumes("application/json")
     @Produces("application/json")
-    fun update(@PathParam("id")id: String, taskList: TaskList): TaskList? {
+    fun update(@PathParam("id")id: String, taskList: TaskList): Response{
         logger.info("chegou id = $id, taskList = $taskList")
-        return daoService.update(id, taskList)
+        return buildUpdateResponse(daoService.update(id, taskList))
     }
 
     @DELETE
     @Path("{id}")
     @Produces("application/json")
-    fun delete(@PathParam("id")id: String): TaskList? {
+    fun delete(@PathParam("id")id: String): Response {
         logger.info("chegou id = $id")
-        return daoService.delete(id)
+        return buildDeleteResponse(daoService.delete(id))
     }
 }
