@@ -22,30 +22,46 @@ class TaskListDao : DynamoDBDao("TaskLists") {
         return toTaskList(super.getById(idCol, id, attributesToGet))
     }
 
-    fun createOrUpdate(taskList: TaskList): TaskList? {
+    fun create(taskList: TaskList): TaskList? {
+        taskList.id = taskList.id.takeIf { it.isNotBlank() } ?: newId()
+
         logger.info("taskList to create: $taskList")
 
-        val item = mapOf(
+        super.createOrUpdate(mapOf(
             idCol to strAttributeValue(taskList.id),
             nameCol to strAttributeValue(taskList.name),
             descriptionCol to strAttributeValue(taskList.description)
-        )
+        ))
 
-        return toTaskList(super.createOrUpdate(item))
+        return taskList
+    }
+
+    fun update(id: String, taskList: TaskList): TaskList? {
+        return super.getById(idCol, id, attributesToGet)?.let {
+            super.createOrUpdate(mapOf(
+                idCol to strAttributeValue(id),
+                nameCol to strAttributeValue(taskList.name),
+                descriptionCol to strAttributeValue(taskList.description)
+            ))
+
+            taskList.apply { this.id = id }
+        }
     }
 
     fun delete(id: String) : TaskList?{
-        return toTaskList(super.delete(idCol, id))
+        return getById(id)?.let {
+            super.delete(idCol, id)
+            it
+        }
     }
 
     private fun toTaskList(item: Map<String, AttributeValue>?): TaskList?{
-        return item?.takeIf { it.isNotEmpty() }
-                   ?.let {
-                        TaskList().apply {
-                            this.id = item.getStrAttributeValue(idCol)
-                            this.name = item.getStrAttributeValue(nameCol)
-                            this.description = item.getStrAttributeValue(descriptionCol)
-                        }
-                   }
+        return item?.let {
+            TaskList().apply {
+                this.id = item.getStrAttributeValue(idCol)
+                this.name = item.getStrAttributeValue(nameCol)
+                this.description = item.getStrAttributeValue(descriptionCol)
+            }
+        }
     }
 }

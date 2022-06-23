@@ -4,15 +4,10 @@ import com.github.reschoene.dao.TaskListDao
 import com.github.reschoene.model.TaskList
 import mu.KotlinLogging
 import javax.inject.Inject
-import javax.ws.rs.DELETE
-import javax.ws.rs.GET
-import javax.ws.rs.POST
-import javax.ws.rs.PUT
-import javax.ws.rs.Path
-import javax.ws.rs.PathParam
+import javax.ws.rs.*
 
 
-@Path("/task-lists")
+@Path("/tasklist")
 class TaskListResourceResource {
     private val logger = KotlinLogging.logger {}
 
@@ -20,6 +15,7 @@ class TaskListResourceResource {
     lateinit var daoService: TaskListDao
 
     @GET
+    @Produces("application/json")
     fun getAll(): List<TaskList?> {
         logger.info("before get all")
         return daoService.findAll()
@@ -27,26 +23,33 @@ class TaskListResourceResource {
 
     @GET
     @Path("{id}")
-    fun getById(@PathParam("id")id: String): TaskList? {
+    @Produces("application/json")
+    fun get(@PathParam("id")id: String): TaskList? {
         logger.info("chegou id = $id")
         return daoService.getById(id)
     }
 
     @POST
+    @Consumes("application/json")
+    @Produces("application/json")
     fun add(taskList: TaskList): TaskList? {
         logger.info("chegou taskList = $taskList")
-        return daoService.createOrUpdate(taskList)
+        return daoService.create(taskList)
     }
 
     @PUT
-    fun update(taskList: TaskList): TaskList? {
-        logger.info("chegou taskList = $taskList")
-        return daoService.createOrUpdate(taskList)
+    @Path("{id}")
+    @Consumes("application/json")
+    @Produces("application/json")
+    fun update(@PathParam("id")id: String, taskList: TaskList): TaskList? {
+        logger.info("chegou id = $id, taskList = $taskList")
+        return daoService.update(id, taskList)
     }
 
     @DELETE
     @Path("{id}")
-    fun deleteById(@PathParam("id")id: String): TaskList? {
+    @Produces("application/json")
+    fun delete(@PathParam("id")id: String): TaskList? {
         logger.info("chegou id = $id")
         return daoService.delete(id)
     }
