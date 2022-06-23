@@ -2,6 +2,8 @@
   quarkus:
     dynamodb:
       endpoint-override: http://localhost:8000
+    swagger-ui:
+      always-include=true:
   aws:
     region: sa-east-1
     credentials:
@@ -11,6 +13,10 @@
         secret-access-key: test-secret
 
 "%prod":
+  quarkus:
+    swagger-ui:
+      always-include=true:
+
   aws:
     region: sa-east-1
     credentials:

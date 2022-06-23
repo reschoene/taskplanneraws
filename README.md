@@ -88,3 +88,9 @@ else ppJson(data);
 
 });
 `
+
+## accessing swagger UI
+http://localhost:8080/q/swagger-ui
+
+## accessing OpenAPI definition
+http://localhost:8080/q/openapi
