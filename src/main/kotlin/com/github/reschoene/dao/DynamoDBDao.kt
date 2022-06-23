@@ -6,8 +6,7 @@ import software.amazon.awssdk.services.dynamodb.model.*
 import javax.enterprise.context.ApplicationScoped
 import javax.inject.Inject
 
-@ApplicationScoped
-class DynamoDBDao (private val tableName: String){
+abstract class DynamoDBDao (private val tableName: String){
     @Inject
     lateinit var dynamoDB: DynamoDbClient
 
