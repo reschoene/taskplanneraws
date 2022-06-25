@@ -94,3 +94,9 @@ http://localhost:8080/q/swagger-ui
 
 ## accessing OpenAPI definition
 http://localhost:8080/q/openapi
+
+## creating dynamodb table on your aws:
+aws dynamodb create-table --table-name TaskLists \
+--attribute-definitions AttributeName=id,AttributeType=S \
+--key-schema AttributeName=id,KeyType=HASH \
+--provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1

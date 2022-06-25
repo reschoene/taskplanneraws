@@ -20,4 +20,7 @@
   aws:
     region: sa-east-1
     credentials:
-      type: default
+      type: static
+      static-provider:
+        access-key: YOUR_ADMIN_KEY
+        secret-access-key: YOUR_ADMIN_SECRET_ACCESS_KEY

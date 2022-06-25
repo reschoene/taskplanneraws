@@ -1,7 +1,6 @@
 package com.github.reschoene.dao
 
 import com.github.reschoene.model.TaskList
-import mu.KotlinLogging
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue
 import javax.enterprise.context.ApplicationScoped
 
@@ -11,8 +10,6 @@ class TaskListDao : DynamoDBDao("TaskLists") {
     private val nameCol = "name"
     private val descriptionCol = "description"
     private val attributesToGet = listOf(idCol, nameCol, descriptionCol)
-
-    private val logger = KotlinLogging.logger {}
 
     fun findAll(): List<TaskList?> {
         return super.findAll(attributesToGet).map(this::toTaskList)
@@ -24,8 +21,6 @@ class TaskListDao : DynamoDBDao("TaskLists") {
 
     fun create(taskList: TaskList): TaskList? {
         taskList.id = taskList.id.takeIf { it.isNotBlank() } ?: newId()
-
-        logger.info("taskList to create: $taskList")
 
         super.createOrUpdate(mapOf(
             idCol to strAttributeValue(taskList.id),
