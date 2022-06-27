@@ -17,6 +17,15 @@ abstract class DynamoDBDao (private val tableName: String){
         return dynamoDB.scanPaginator(scanRequest).items()
     }
 
+    protected fun findByFilter(attributeValues: Map<String, AttributeValue>, filterExpression: String): SdkIterable<Map<String, AttributeValue>> {
+        val scanRequest = ScanRequest.builder().tableName(tableName)
+            .expressionAttributeValues(attributeValues)
+            .filterExpression(filterExpression)
+            .build()
+
+        return dynamoDB.scanPaginator(scanRequest).items()
+    }
+
     protected fun getById(idColName: String, idValue: String?, attributesToGet: List<String>): Map<String, AttributeValue>? {
         val key = mapOf(idColName to strAttributeValue(idValue))
 
@@ -56,7 +65,15 @@ abstract class DynamoDBDao (private val tableName: String){
     protected fun strAttributeValue(value: String?): AttributeValue =
         AttributeValue.builder().s(value).build()
 
+    protected fun boolAttributeValue(value: Boolean?): AttributeValue =
+        AttributeValue.builder().bool(value).build()
+
+    protected fun longAttributeValue(value: Long?): AttributeValue =
+        AttributeValue.builder().n(value?.toString() ?: "0").build()
+
     protected fun Map<String, AttributeValue>.getStrAttributeValue(colName: String) = get(colName)?.s() ?: ""
+    protected fun Map<String, AttributeValue>.getBoolAttributeValue(colName: String) = get(colName)?.bool() ?: false
+    protected fun Map<String, AttributeValue>.getLongAttributeValue(colName: String) = get(colName)?.n()?.toLong() ?: 0L
 
     protected fun newId() = UUID.randomUUID().toString()
 }

@@ -18,4 +18,10 @@ open class BaseResource {
             .status(Response.Status.CREATED)
             .build()
     }
+
+    protected fun <T> buildValidationErrorResponse(model: T?): Response {
+        return Response.ok(model)
+            .status(Response.Status.BAD_REQUEST)
+            .build()
+    }
 }
