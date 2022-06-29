@@ -8,8 +8,8 @@ import javax.enterprise.context.ApplicationScoped
 class TaskListDao : DynamoDBDao("TaskLists") {
     private val idCol = "id"
     private val nameCol = "name"
-    private val descriptionCol = "description"
-    private val attributesToGet = listOf(idCol, nameCol, descriptionCol)
+    private val taskCountCol = "taskCount"
+    private val attributesToGet = listOf(idCol, nameCol, taskCountCol)
 
     fun findAll(): List<TaskList?> {
         return super.findAll(attributesToGet).map(this::toTaskList)
@@ -25,7 +25,7 @@ class TaskListDao : DynamoDBDao("TaskLists") {
         super.createOrUpdate(mapOf(
             idCol to strAttributeValue(taskList.id),
             nameCol to strAttributeValue(taskList.name),
-            descriptionCol to strAttributeValue(taskList.description)
+            taskCountCol to longAttributeValue(taskList.taskCount)
         ))
 
         return taskList
@@ -36,7 +36,7 @@ class TaskListDao : DynamoDBDao("TaskLists") {
             super.createOrUpdate(mapOf(
                 idCol to strAttributeValue(id),
                 nameCol to strAttributeValue(taskList.name),
-                descriptionCol to strAttributeValue(taskList.description)
+                taskCountCol to longAttributeValue(taskList.taskCount)
             ))
 
             taskList.apply { this.id = id }
@@ -55,7 +55,7 @@ class TaskListDao : DynamoDBDao("TaskLists") {
             TaskList().apply {
                 this.id = item.getStrAttributeValue(idCol)
                 this.name = item.getStrAttributeValue(nameCol)
-                this.description = item.getStrAttributeValue(descriptionCol)
+                this.taskCount = item.getLongAttributeValue(taskCountCol)
             }
         }
     }

@@ -4,7 +4,7 @@ import com.github.reschoene.model.Task
 
 data class TaskRequest (var id: String = "", var name: String = ""){
     var description: String = ""
-    var taskListId: String = ""
+    var taskList: TaskListRequest? = null
     var completed: Boolean = false
     var position: Long = 0L
 
@@ -13,7 +13,7 @@ data class TaskRequest (var id: String = "", var name: String = ""){
 
         return Task().apply {
             this.id = taskRequest.id
-            this.taskListId = taskRequest.taskListId
+            this.taskList = taskRequest.taskList?.toModel()
             this.name = taskRequest.name
             this.description = taskRequest.description
             this.completed = taskRequest.completed

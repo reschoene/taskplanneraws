@@ -4,10 +4,13 @@ import com.github.reschoene.dto.TaskFilter
 import com.github.reschoene.model.Task
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue
 import javax.enterprise.context.ApplicationScoped
-
+import javax.inject.Inject
 
 @ApplicationScoped
 class TaskDao : DynamoDBDao("Tasks") {
+    @Inject
+    lateinit var taskListDao: TaskListDao
+
     private val idCol = "id"
     private val taskListIdCol = "taskListId"
     private val nameCol = "name"
@@ -27,6 +30,10 @@ class TaskDao : DynamoDBDao("Tasks") {
     fun create(task: Task): Task? {
         task.id = task.id.takeIf { it.isNotBlank() } ?: newId()
 
+        task.taskList?.let {
+            task.taskListId = taskListDao.create(it)?.id ?: ""
+        }
+
         super.createOrUpdate(mapOf(
             idCol to strAttributeValue(task.id),
             taskListIdCol to strAttributeValue(task.taskListId),
@@ -41,6 +48,10 @@ class TaskDao : DynamoDBDao("Tasks") {
 
     fun update(id: String, task: Task): Task? {
         return super.getById(idCol, id, attributesToGet)?.let {
+            task.taskList?.let {
+                task.taskListId = taskListDao.update(it.id, it)?.id ?: ""
+            }
+
             super.createOrUpdate(mapOf(
                 idCol to strAttributeValue(id),
                 taskListIdCol to strAttributeValue(task.taskListId),
@@ -89,6 +100,12 @@ class TaskDao : DynamoDBDao("Tasks") {
                 this.taskListId = item.getStrAttributeValue(taskListIdCol)
                 this.completed = item.getBoolAttributeValue(completedCol)
                 this.position = item.getLongAttributeValue(positionCol)
+
+                if (this.taskListId.isNotEmpty()) {
+                    taskListDao.getById(this.taskListId)?.let {
+                        this.taskList = it
+                    }
+                }
             }
         }
     }
