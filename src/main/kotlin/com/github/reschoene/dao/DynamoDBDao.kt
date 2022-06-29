@@ -17,13 +17,16 @@ abstract class DynamoDBDao (private val tableName: String){
         return dynamoDB.scanPaginator(scanRequest).items()
     }
 
-    protected fun findByFilter(attributeValues: Map<String, AttributeValue>, filterExpression: String): SdkIterable<Map<String, AttributeValue>> {
-        val scanRequest = ScanRequest.builder().tableName(tableName)
+    protected fun findByFilter(pTableName: String, attributeValues: Map<String, AttributeValue>, filterExpression: String): SdkIterable<Map<String, AttributeValue>> {
+        val scanRequest = ScanRequest.builder().tableName(pTableName)
             .expressionAttributeValues(attributeValues)
             .filterExpression(filterExpression)
             .build()
 
         return dynamoDB.scanPaginator(scanRequest).items()
+    }
+    protected fun findByFilter(attributeValues: Map<String, AttributeValue>, filterExpression: String): SdkIterable<Map<String, AttributeValue>> {
+        return findByFilter(tableName, attributeValues, filterExpression)
     }
 
     protected fun getById(idColName: String, idValue: String?, attributesToGet: List<String>): Map<String, AttributeValue>? {

@@ -8,8 +8,7 @@ import javax.enterprise.context.ApplicationScoped
 class TaskListDao : DynamoDBDao("TaskLists") {
     private val idCol = "id"
     private val nameCol = "name"
-    private val taskCountCol = "taskCount"
-    private val attributesToGet = listOf(idCol, nameCol, taskCountCol)
+    private val attributesToGet = listOf(idCol, nameCol)
 
     fun findAll(): List<TaskList?> {
         return super.findAll(attributesToGet).map(this::toTaskList)
@@ -24,8 +23,7 @@ class TaskListDao : DynamoDBDao("TaskLists") {
 
         super.createOrUpdate(mapOf(
             idCol to strAttributeValue(taskList.id),
-            nameCol to strAttributeValue(taskList.name),
-            taskCountCol to longAttributeValue(taskList.taskCount)
+            nameCol to strAttributeValue(taskList.name)
         ))
 
         return taskList
@@ -35,8 +33,7 @@ class TaskListDao : DynamoDBDao("TaskLists") {
         return super.getById(idCol, id, attributesToGet)?.let {
             super.createOrUpdate(mapOf(
                 idCol to strAttributeValue(id),
-                nameCol to strAttributeValue(taskList.name),
-                taskCountCol to longAttributeValue(taskList.taskCount)
+                nameCol to strAttributeValue(taskList.name)
             ))
 
             taskList.apply { this.id = id }
@@ -55,8 +52,15 @@ class TaskListDao : DynamoDBDao("TaskLists") {
             TaskList().apply {
                 this.id = item.getStrAttributeValue(idCol)
                 this.name = item.getStrAttributeValue(nameCol)
-                this.taskCount = item.getLongAttributeValue(taskCountCol)
+                this.taskCount = getTaskListCount(this.id)
             }
         }
+    }
+
+    private fun getTaskListCount(taskListId: String): Int {
+        val attributeValues = mutableMapOf(":taskListId" to strAttributeValue(taskListId))
+        val filterExpression = "taskListId = :taskListId"
+
+        return super.findByFilter("Tasks", attributeValues, filterExpression).toList().size
     }
 }

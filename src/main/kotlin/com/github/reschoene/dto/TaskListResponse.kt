@@ -3,7 +3,7 @@ package com.github.reschoene.dto
 import com.github.reschoene.model.TaskList
 
 data class TaskListResponse (var id: String = "", var name: String = ""){
-    var taskCount: Long = 0L
+    var taskCount: Int = 0
 }
 
 fun TaskList.toTaskListResponse(): TaskListResponse = TaskListResponse().let { taskListResponse ->
