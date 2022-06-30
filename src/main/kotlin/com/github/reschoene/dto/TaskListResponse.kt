@@ -1,7 +1,9 @@
 package com.github.reschoene.dto
 
 import com.github.reschoene.model.TaskList
+import io.quarkus.runtime.annotations.RegisterForReflection
 
+@RegisterForReflection
 data class TaskListResponse (var id: String = "", var name: String = ""){
     var taskCount: Int = 0
 }

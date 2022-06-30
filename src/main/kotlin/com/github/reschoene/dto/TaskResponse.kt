@@ -1,7 +1,9 @@
 package com.github.reschoene.dto
 
 import com.github.reschoene.model.Task
+import io.quarkus.runtime.annotations.RegisterForReflection
 
+@RegisterForReflection
 data class TaskResponse (var id: String = "", var name: String = ""){
     var description: String = ""
     var completed: Boolean = false
