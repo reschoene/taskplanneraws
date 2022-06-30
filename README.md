@@ -100,6 +100,19 @@ if (err) ppJson(err);
 else ppJson(data);
 
 });
+
+params = {
+TableName: 'Quotations',
+KeySchema: [{ AttributeName: 'id', KeyType: 'HASH' }],
+AttributeDefinitions: [{  AttributeName: 'id', AttributeType: 'S', }],
+ProvisionedThroughput: { ReadCapacityUnits: 1, WriteCapacityUnits: 1, }
+};
+
+dynamodb.createTable(params, function(err, data) {
+if (err) ppJson(err);
+else ppJson(data);
+
+});
 `
 
 ## accessing swagger UI
@@ -115,6 +128,11 @@ aws dynamodb create-table --table-name TaskLists \
 --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
 
 aws dynamodb create-table --table-name Tasks \
+--attribute-definitions AttributeName=id,AttributeType=S \
+--key-schema AttributeName=id,KeyType=HASH \
+--provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+
+aws dynamodb create-table --table-name Quotations \
 --attribute-definitions AttributeName=id,AttributeType=S \
 --key-schema AttributeName=id,KeyType=HASH \
 --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
