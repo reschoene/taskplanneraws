@@ -24,22 +24,22 @@ class TaskListService {
         return daoService.getById(id)?.toTaskListResponse()
     }
 
-    fun create(TaskListRequest: TaskListRequest?): TaskListResponse? {
-        if(TaskListRequest == null)
+    fun create(taskListRequest: TaskListRequest?): TaskListResponse? {
+        if(taskListRequest == null)
             throw ValidationException("request body not present")
 
-        val task = TaskListRequest.toModel()
+        val task = taskListRequest.toModel()
         return daoService.create(task)?.toTaskListResponse()
     }
 
-    fun update(id: String?, TaskListRequest: TaskListRequest?): TaskListResponse? {
+    fun update(id: String?, taskListRequest: TaskListRequest?): TaskListResponse? {
         if(id == null)
             throw ValidationException("id not present")
 
-        if(TaskListRequest == null)
+        if(taskListRequest == null)
             throw ValidationException("TaskListRequest not present")
 
-        return daoService.update(id, TaskListRequest.toModel())?.toTaskListResponse()
+        return daoService.update(id, taskListRequest.toModel())?.toTaskListResponse()
     }
 
     fun delete(id: String?) : TaskListResponse?{
