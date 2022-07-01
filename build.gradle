@@ -24,6 +24,9 @@ dependencies {
     implementation 'io.quarkus:quarkus-config-yaml'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.1"
+    testImplementation "org.testcontainers:testcontainers:1.17.3"
+    testImplementation "org.testcontainers:junit-jupiter:1.17.3"
 }
 
 group 'com.github.reschoene'

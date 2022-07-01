@@ -1,0 +1,26 @@
+"%dev":
+  quarkus:
+    dynamodb:
+      endpoint-override: http://localhost:8000
+    swagger-ui:
+      always-include=true:
+  aws:
+    region: sa-east-1
+    credentials:
+      type: static
+      static-provider:
+        access-key: test-key
+        secret-access-key: test-secret
+
+"%prod":
+  quarkus:
+    swagger-ui:
+      always-include=true:
+
+  aws:
+    region: sa-east-1
+    credentials:
+      type: static
+      static-provider:
+        access-key: YOUR_ADMIN_KEY
+        secret-access-key: YOUR_ADMIN_SECRET_ACCESS_KEY

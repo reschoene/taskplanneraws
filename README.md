@@ -4,7 +4,7 @@ A simple task planner API for listing tasks grouped by lists and managing them
 ## Stack
 - Kotlin, Java with GraalVM (for native compilation)
 - Quarkus, the Supersonic Subatomic Java Framework.
-- RESTEasy, RESTAssured
+- TestContainers, RESTEasy, RESTAssured
 - AWS Lambda, AWS API Gateway, AWS Dynamodb
 - AWS SAM CLI (for local testing and AWS Deploy): SAM = Serverless Application Model
 
