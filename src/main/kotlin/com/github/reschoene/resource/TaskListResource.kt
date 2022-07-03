@@ -38,7 +38,7 @@ class TaskListResourceResource : BaseResource() {
     @APIResponse(responseCode = "404", description = "Specified ID was not found")
     @APIResponse(responseCode = "200", description = "Specified ID was obtained")
     @Produces("application/json")
-    fun get(@PathParam("id")id: String?): Response {
+    fun get(@PathParam("id")id: String): Response {
         return buildSearchResponse(taskListService.getById(id))
     }
 
@@ -59,7 +59,7 @@ class TaskListResourceResource : BaseResource() {
     @APIResponse(responseCode = "200", description = "item was successfully updated")
     @Consumes("application/json")
     @Produces("application/json")
-    fun update(@PathParam("id")id: String?, taskListRequest: TaskListRequest?): Response{
+    fun update(@PathParam("id")id: String, taskListRequest: TaskListRequest?): Response{
         return buildUpdateResponse(taskListService.update(id, taskListRequest))
     }
 
@@ -70,7 +70,7 @@ class TaskListResourceResource : BaseResource() {
     @APIResponse(responseCode = "404", description = "Specified ID was not found")
     @APIResponse(responseCode = "200", description = "item was successfully deleted")
     @Produces("application/json")
-    fun delete(@PathParam("id")id: String?): Response {
+    fun delete(@PathParam("id")id: String): Response {
         return buildDeleteResponse(taskListService.delete(id))
     }
 }

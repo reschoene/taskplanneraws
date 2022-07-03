@@ -31,36 +31,48 @@ class TaskListResourceTest {
 
     @Test
     @Order(2)
-    fun getSuccessfullyRetrievesATaskList() {
+    fun postReturns400WhenRequestBodyIsEmpty() {
         val resp = given()
             .contentType(ContentType.JSON)
+            .`when`().post("/tasklist")
+            .then()
+            .extract().response()
+
+        assertEquals(400, resp.statusCode())
+    }
+
+    @Test
+    @Order(3)
+    fun getSuccessfullyRetrievesATaskList() {
+        val resp = given()
             .`when`()
             .get("/tasklist")
             .then()
             .extract().response()
 
         assertEquals(200, resp.statusCode())
+        assertEquals("application/json", resp.contentType())
         assertEquals("taskListID", resp.jsonPath().getString("id[0]"))
         assertEquals("test", resp.jsonPath().getString("name[0]"))
     }
 
     @Test
-    @Order(3)
+    @Order(4)
     fun getByIdSuccessfullyRetrievesATaskList() {
         val resp = given()
-            .contentType(ContentType.JSON)
             .`when`()
             .get("/tasklist/taskListID")
             .then()
             .extract().response()
 
         assertEquals(200, resp.statusCode())
+        assertEquals("application/json", resp.contentType())
         assertEquals("taskListID", resp.jsonPath().getString("id"))
         assertEquals("test", resp.jsonPath().getString("name"))
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     fun putSuccessfullyUpdatesAndRetrievesATaskList() {
         val resp = given()
             .contentType(ContentType.JSON)
@@ -72,12 +84,26 @@ class TaskListResourceTest {
             .extract().response()
 
         assertEquals(200, resp.statusCode())
+        assertEquals("application/json", resp.contentType())
         assertEquals("taskListID", resp.jsonPath().getString("id"))
         assertEquals("new name", resp.jsonPath().getString("name"))
     }
 
     @Test
-    @Order(5)
+    @Order(6)
+    fun putReturns400WhenRequestBodyIsEmpty() {
+        val resp = given()
+            .contentType(ContentType.JSON)
+            .`when`()
+            .put("/tasklist/taskListID")
+            .then()
+            .extract().response()
+
+        assertEquals(400, resp.statusCode())
+    }
+
+    @Test
+    @Order(7)
     fun deleteSuccessfullyRemovesAndRetrievesATaskList() {
         val resp = given()
             .`when`()
@@ -86,12 +112,13 @@ class TaskListResourceTest {
             .extract().response()
 
         assertEquals(200, resp.statusCode())
+        assertEquals("application/json", resp.contentType())
         assertEquals("taskListID", resp.jsonPath().getString("id"))
         assertEquals("new name", resp.jsonPath().getString("name"))
     }
 
     @Test
-    @Order(6)
+    @Order(8)
     fun getByIdReturns404WhenIdNotFound() {
         val resp = given()
             .contentType(ContentType.JSON)
@@ -104,7 +131,7 @@ class TaskListResourceTest {
     }
 
     @Test
-    @Order(7)
+    @Order(9)
     fun putReturns404WhenIdNotFound() {
         val resp = given()
             .contentType(ContentType.JSON)
@@ -119,7 +146,7 @@ class TaskListResourceTest {
     }
 
     @Test
-    @Order(8)
+    @Order(10)
     fun deleteReturns404WhenIdNotFound() {
         val resp = given()
             .`when`()

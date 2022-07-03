@@ -41,7 +41,7 @@ class TaskResource : BaseResource() {
     @APIResponse(responseCode = "404", description = "Specified ID was not found")
     @APIResponse(responseCode = "200", description = "Specified ID was obtained")
     @Produces("application/json")
-    fun get(@PathParam("id")id: String?): Response {
+    fun get(@PathParam("id")id: String): Response {
         return buildSearchResponse(taskService.getById(id))
     }
 
@@ -63,7 +63,7 @@ class TaskResource : BaseResource() {
     @APIResponse(responseCode = "200", description = "item was successfully updated")
     @Consumes("application/json")
     @Produces("application/json")
-    fun update(@PathParam("id")id: String?, taskRequest: TaskRequest?): Response{
+    fun update(@PathParam("id")id: String, taskRequest: TaskRequest?): Response{
         return buildUpdateResponse(taskService.update(id, taskRequest))
     }
 
@@ -74,7 +74,7 @@ class TaskResource : BaseResource() {
     @APIResponse(responseCode = "404", description = "Specified ID was not found")
     @APIResponse(responseCode = "200", description = "item was successfully deleted")
     @Produces("application/json")
-    fun delete(@PathParam("id")id: String?): Response {
+    fun delete(@PathParam("id")id: String): Response {
         return buildDeleteResponse(taskService.delete(id))
     }
 
@@ -94,11 +94,12 @@ class TaskResource : BaseResource() {
 
     @PUT
     @Path("swapTasksOrder")
-    @Operation(summary = "Retrieve a task by ID and numeric filter")
+    @Operation(summary = "Changes task positions by its ids and new positions")
     @Consumes("application/json")
     @APIResponse(responseCode = "404", description = "Specified ID was not found")
     @APIResponse(responseCode = "200", description = "Tasks position was swapped")
-    fun swapTasksOrder(swapTasksOrderParam: SwapTasksOrderParam?) {
+    fun swapTasksOrder(swapTasksOrderParam: SwapTasksOrderParam?): Response {
         taskService.swapTasksOrder(swapTasksOrderParam)
+        return Response.ok().build()
     }
 }

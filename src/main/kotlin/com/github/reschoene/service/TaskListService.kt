@@ -17,10 +17,7 @@ class TaskListService {
         return daoService.findAll().map { it?.toTaskListResponse() }
     }
 
-    fun getById(id: String?): TaskListResponse? {
-        if(id == null)
-            throw ValidationException("id not present")
-
+    fun getById(id: String): TaskListResponse? {
         return daoService.getById(id)?.toTaskListResponse()
     }
 
@@ -32,20 +29,14 @@ class TaskListService {
         return daoService.create(task)?.toTaskListResponse()
     }
 
-    fun update(id: String?, taskListRequest: TaskListRequest?): TaskListResponse? {
-        if(id == null)
-            throw ValidationException("id not present")
-
+    fun update(id: String, taskListRequest: TaskListRequest?): TaskListResponse? {
         if(taskListRequest == null)
             throw ValidationException("TaskListRequest not present")
 
         return daoService.update(id, taskListRequest.toModel())?.toTaskListResponse()
     }
 
-    fun delete(id: String?) : TaskListResponse?{
-        if(id == null)
-            throw ValidationException("id not present")
-        
+    fun delete(id: String) : TaskListResponse?{
         return daoService.delete(id)?.toTaskListResponse()
     }
 }

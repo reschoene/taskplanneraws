@@ -5,6 +5,7 @@ import com.github.reschoene.dto.*
 import com.github.reschoene.exception.ValidationException
 import javax.enterprise.context.ApplicationScoped
 import javax.inject.Inject
+import javax.ws.rs.core.Response
 
 @ApplicationScoped
 class TaskService {
@@ -15,10 +16,7 @@ class TaskService {
         return daoService.findAll().map { it?.toTaskResponse() }
     }
 
-    fun getById(id: String?): TaskResponse? {
-        if(id == null)
-            throw ValidationException("id not present")
-
+    fun getById(id: String): TaskResponse? {
         return daoService.getById(id)?.toTaskResponse()
     }
 
@@ -30,20 +28,14 @@ class TaskService {
         return daoService.create(task)?.toTaskResponse()
     }
 
-    fun update(id: String?, taskRequest: TaskRequest?): TaskResponse? {
-        if(id == null)
-            throw ValidationException("id not present")
-
+    fun update(id: String, taskRequest: TaskRequest?): TaskResponse? {
         if(taskRequest == null)
             throw ValidationException("taskRequest not present")
 
         return daoService.update(id, taskRequest.toModel())?.toTaskResponse()
     }
 
-    fun delete(id: String?) : TaskResponse?{
-        if(id == null)
-            throw ValidationException("id not present")
-
+    fun delete(id: String) : TaskResponse?{
         return daoService.delete(id)?.toTaskResponse()
     }
 
@@ -71,10 +63,10 @@ class TaskService {
         val task2 = daoService.getById(swapTasksOrderParam.task2Id)
 
         if(task1 == null)
-            throw ValidationException("Task for id task1Id was not found")
+            throw ValidationException("Task for id task1Id was not found", Response.Status.NOT_FOUND)
 
         if(task2 == null)
-            throw ValidationException("Task for id task2Id was not found")
+            throw ValidationException("Task for id task2Id was not found", Response.Status.NOT_FOUND)
 
         task1.position = swapTasksOrderParam.task1Pos
         task2.position = swapTasksOrderParam.task2Pos

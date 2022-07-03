@@ -17,10 +17,7 @@ class QuotationService {
         return daoService.findAll().map { it?.toQuotationResponse() }
     }
 
-    fun getById(id: String?): QuotationResponse? {
-        if(id == null)
-            throw ValidationException("id not present")
-
+    fun getById(id: String): QuotationResponse? {
         return daoService.getById(id)?.toQuotationResponse()
     }
 
@@ -32,20 +29,14 @@ class QuotationService {
         return daoService.create(task)?.toQuotationResponse()
     }
 
-    fun update(id: String?, quotationRequest: QuotationRequest?): QuotationResponse? {
-        if(id == null)
-            throw ValidationException("id not present")
-
+    fun update(id: String, quotationRequest: QuotationRequest?): QuotationResponse? {
         if(quotationRequest == null)
             throw ValidationException("TaskListRequest not present")
 
         return daoService.update(id, quotationRequest.toModel())?.toQuotationResponse()
     }
 
-    fun delete(id: String?) : QuotationResponse?{
-        if(id == null)
-            throw ValidationException("id not present")
-        
+    fun delete(id: String) : QuotationResponse?{
         return daoService.delete(id)?.toQuotationResponse()
     }
 }

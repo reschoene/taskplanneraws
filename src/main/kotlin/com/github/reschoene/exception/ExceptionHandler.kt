@@ -11,7 +11,7 @@ class ExceptionHandler : ExceptionMapper<ValidationException> {
 
     override fun toResponse(exception: ValidationException?): Response {
         return Response
-            .status(Response.Status.BAD_REQUEST)
+            .status(exception?.status ?: Response.Status.BAD_REQUEST)
             .entity(ErrorResponse(exception?.message ?: exceptionNotPresent))
             .build()
     }
