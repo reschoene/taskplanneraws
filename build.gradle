@@ -6,6 +6,10 @@ plugins {
     id "org.sonarqube" version "3.3"
 }
 
+jacoco {
+    toolVersion = "0.8.7"
+}
+
 jacocoTestReport {
     reports {
         xml.enabled true
