@@ -6,19 +6,20 @@
 	},
 	"item": [
 		{
-			"name": "get OpenAPI",
+			"name": "openapi3 endpoint",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/tasklist",
+					"raw": "http://localhost:8080/q/openapi",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"tasklist"
+						"q",
+						"openapi"
 					]
 				}
 			},
@@ -30,6 +31,34 @@
 				"method": "GET",
 				"header": [],
 				"url": {
+					"raw": "http://localhost:8080/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TaskLists - create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"mercado\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
 					"raw": "http://localhost:8080/tasklist",
 					"protocol": "http",
 					"host": [
@@ -44,7 +73,7 @@
 			"response": []
 		},
 		{
-			"name": "TaskLists - get all Copy",
+			"name": "TaskLists - get all",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -83,6 +112,35 @@
 			"response": []
 		},
 		{
+			"name": "TaskLists - update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"renato s!!!\",\n    \"description\": \"lista d mercado222233\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasklist/be191b9f-c6e1-4b1f-b50a-2fa7b4cd3a66",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasklist",
+						"be191b9f-c6e1-4b1f-b50a-2fa7b4cd3a66"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "TaskLists - delete",
 			"request": {
 				"method": "DELETE",
@@ -103,13 +161,13 @@
 			"response": []
 		},
 		{
-			"name": "TaskLists - update",
+			"name": "Tasks - create",
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"renato s!!!\",\n    \"description\": \"lista d mercado2222\"\n}",
+					"raw": "{\n    \"name\": \"queijo33\",\n    \"taskList\":{\n        \"id\": \"a7add966-14d9-4646-a152-e03225f2432a\",\n        \"name\": \"2232\"\n    },\n    \"description\": \"queijo minas\",\n    \"position\": 2,\n    \"completed\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -117,28 +175,95 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/tasklist/3",
+					"raw": "http://localhost:8080/task",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"tasklist",
-						"3"
+						"task"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "TaskLists - create",
+			"name": "Tasks - get all",
 			"request": {
-				"method": "POST",
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/task",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tasks -  get by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/task/95f56bfb-c652-41de-a998-a45abb9194dd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"task",
+						"95f56bfb-c652-41de-a998-a45abb9194dd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tasks -  get by filter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasksByFilter?taskListId=c1f83781-b72b-49c9-998c-95866c61bd79&taskFilter=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasksByFilter"
+					],
+					"query": [
+						{
+							"key": "taskListId",
+							"value": "c1f83781-b72b-49c9-998c-95866c61bd79"
+						},
+						{
+							"key": "taskFilter",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tasks - update",
+			"request": {
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"s listasss\",\n    \"description\": \"lista d mercado\"\n}",
+					"raw": "{\n    \"name\": \"arroz\",\n    \"description\": \"saco de 1kg\",\n    \"completed\": false,\n    \"position\": 1,\n    \"taskList\":{\n        \"id\": \"c1f83781-b72b-49c9-998c-95866c61bd79\",\n        \"name\": \"asdas\"\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -146,14 +271,189 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/tasklist",
+					"raw": "http://localhost:8080/task/95f56bfb-c652-41de-a998-a45abb9194dd",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"tasklist"
+						"task",
+						"95f56bfb-c652-41de-a998-a45abb9194dd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tasks - delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/task/dc3942bf-e0bf-499b-855a-fafa75f941ae",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"task",
+						"dc3942bf-e0bf-499b-855a-fafa75f941ae"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "swapTasksOrder",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"task1Id\": \"d22cc6f5-0aa1-4c75-8101-e594893a119e\",\n    \"task1Pos\": 1,\n    \"task2Id\": \"95f56bfb-c652-41de-a998-a45abb9194dd\",\n    \"task2Pos\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/swapTasksOrder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"swapTasksOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quotation - create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/quotation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quotation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quotation - get all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/quotation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quotation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quotation - get by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/quotation/95f56bfb-c652-41de-a998-a45abb9194dd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quotation",
+						"95f56bfb-c652-41de-a998-a45abb9194dd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quotation - update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"author\": \"Renato\",\n    \"phrase\": \"teste de frase\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/quotation/95f56bfb-c652-41de-a998-a45abb9194dd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quotation",
+						"95f56bfb-c652-41de-a998-a45abb9194dd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quotation - delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/quotation/95f56bfb-c652-41de-a998-a45abb9194dd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quotation",
+						"95f56bfb-c652-41de-a998-a45abb9194dd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "gets a random greeting",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/greeting",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"greeting"
 					]
 				}
 			},
