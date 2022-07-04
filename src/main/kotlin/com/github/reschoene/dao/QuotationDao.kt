@@ -19,27 +19,27 @@ class QuotationDao : DynamoDBDao("Quotations") {
         return toQuotation(super.getById(idCol, id, attributesToGet))
     }
 
-    fun create(Quotation: Quotation): Quotation? {
-        Quotation.id = Quotation.id.takeIf { it.isNotBlank() } ?: newId()
+    fun create(quotation: Quotation): Quotation? {
+        quotation.id = quotation.id.takeIf { it.isNotBlank() } ?: newId()
 
         super.createOrUpdate(mapOf(
-            idCol to strAttributeValue(Quotation.id),
-            phraseCol to strAttributeValue(Quotation.phrase),
-            authorCol to strAttributeValue(Quotation.author)
+            idCol to strAttributeValue(quotation.id),
+            phraseCol to strAttributeValue(quotation.phrase),
+            authorCol to strAttributeValue(quotation.author)
         ))
 
-        return Quotation
+        return quotation
     }
 
-    fun update(id: String, Quotation: Quotation): Quotation? {
+    fun update(id: String, quotation: Quotation): Quotation? {
         return super.getById(idCol, id, attributesToGet)?.let {
             super.createOrUpdate(mapOf(
                 idCol to strAttributeValue(id),
-                phraseCol to strAttributeValue(Quotation.phrase),
-                authorCol to strAttributeValue(Quotation.author)
+                phraseCol to strAttributeValue(quotation.phrase),
+                authorCol to strAttributeValue(quotation.author)
             ))
 
-            Quotation.apply { this.id = id }
+            quotation.apply { this.id = id }
         }
     }
 

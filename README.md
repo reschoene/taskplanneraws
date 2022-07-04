@@ -1,6 +1,8 @@
 # TaskPlanner for AWS
 A simple task planner API for listing tasks grouped by lists and managing them
 
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=reschoene_taskplanneraws)](https://sonarcloud.io/summary/new_code?id=reschoene_taskplanneraws)
+
 ## Stack
 - Kotlin, Java with GraalVM (for native compilation)
 - Quarkus, the Supersonic Subatomic Java Framework.
