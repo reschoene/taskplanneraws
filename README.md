@@ -1,14 +1,23 @@
 # TaskPlanner for AWS
 A simple task planner API for listing tasks grouped by lists and managing them
 
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=reschoene_taskplanneraws)](https://sonarcloud.io/summary/new_code?id=reschoene_taskplanneraws)
-
 ## Stack
 - Kotlin, Java with GraalVM (for native compilation)
 - Quarkus, the Supersonic Subatomic Java Framework.
 - TestContainers, RESTEasy, RESTAssured
 - AWS Lambda, AWS API Gateway, AWS Dynamodb
 - AWS SAM CLI (for local testing and AWS Deploy): SAM = Serverless Application Model
+
+## Project status - Sonar analysis
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=reschoene_taskplanneraws)](https://sonarcloud.io/summary/new_code?id=reschoene_taskplanneraws)
+
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=reschoene_taskplanneraws&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=reschoene_taskplanneraws)
+
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=reschoene_taskplanneraws&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=reschoene_taskplanneraws)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=reschoene_taskplanneraws&metric=bugs)](https://sonarcloud.io/summary/new_code?id=reschoene_taskplanneraws)
+
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=reschoene_taskplanneraws&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=reschoene_taskplanneraws)
 
 ## Build and Deploy 
 There are two deploy options available: JVM and native executables. Bellow are the instructions for each one
