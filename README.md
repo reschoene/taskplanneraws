@@ -86,7 +86,8 @@ Open "http://localhost:8000/shell" in your browser.
 
 Copy and paste the following code to the shell and run it:
 
-` var params = {
+```shell script 
+var params = {
 TableName: 'TaskLists',
 KeySchema: [{ AttributeName: 'id', KeyType: 'HASH' }],
 AttributeDefinitions: [{  AttributeName: 'id', AttributeType: 'S', }],
@@ -123,7 +124,8 @@ dynamodb.createTable(params, function(err, data) {
 if (err) ppJson(err);
 else ppJson(data);
 
-}); `
+});
+```
 
 ## accessing swagger UI
 http://localhost:8080/q/swagger-ui
@@ -132,17 +134,23 @@ http://localhost:8080/q/swagger-ui
 http://localhost:8080/q/openapi
 
 ## creating dynamodb table on your aws:
+```shell script 
 aws dynamodb create-table --table-name TaskLists \
 --attribute-definitions AttributeName=id,AttributeType=S \
 --key-schema AttributeName=id,KeyType=HASH \
 --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+```
 
+```shell script 
 aws dynamodb create-table --table-name Tasks \
 --attribute-definitions AttributeName=id,AttributeType=S \
 --key-schema AttributeName=id,KeyType=HASH \
 --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+```
 
+```shell script 
 aws dynamodb create-table --table-name Quotations \
 --attribute-definitions AttributeName=id,AttributeType=S \
 --key-schema AttributeName=id,KeyType=HASH \
 --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+```
