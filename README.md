@@ -154,3 +154,20 @@ aws dynamodb create-table --table-name Quotations \
 --key-schema AttributeName=id,KeyType=HASH \
 --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
 ```
+
+### SonarCloud Integration:
+Change sonarqube properties on build.gradle file to your SonarCloud configs
+
+#### To generate JaCoCo coverage reports, run:
+```shell script
+./gradlew test
+```
+
+#### To upload coverage data to SonarCloud:
+```shell script 
+export SONAR_TOKEN=YOUR_SONAR_KEY
+```
+
+```shell script 
+./gradlew sonarqube
+```
