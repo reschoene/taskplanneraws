@@ -19,6 +19,8 @@ A simple task planner API for listing tasks grouped by lists and managing them
 
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=reschoene_taskplanneraws&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=reschoene_taskplanneraws)
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=reschoene_taskplanneraws&metric=coverage)](https://sonarcloud.io/summary/new_code?id=reschoene_taskplanneraws)
+
 ## Build and Deploy 
 There are two deploy options available: JVM and native executables. Bellow are the instructions for each one
 
