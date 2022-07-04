@@ -85,8 +85,8 @@ This starts a DynamoDB instance that is accessible on port 8000. You can check i
 Open "http://localhost:8000/shell" in your browser.
 
 Copy and paste the following code to the shell and run it:
-`
-var params = {
+
+` var params = {
 TableName: 'TaskLists',
 KeySchema: [{ AttributeName: 'id', KeyType: 'HASH' }],
 AttributeDefinitions: [{  AttributeName: 'id', AttributeType: 'S', }],
@@ -123,8 +123,7 @@ dynamodb.createTable(params, function(err, data) {
 if (err) ppJson(err);
 else ppJson(data);
 
-});
-`
+}); `
 
 ## accessing swagger UI
 http://localhost:8080/q/swagger-ui
