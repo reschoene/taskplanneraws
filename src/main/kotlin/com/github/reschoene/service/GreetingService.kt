@@ -24,7 +24,7 @@ class GreetingService {
         return if (quotations.isEmpty()) null else {
             val photoId = getRandPhotoId()
             val randQuotation = getRandQuotation(quotations)
-            val greeting = Greeting(randQuotation!!, "photos/$photoId.jpg")
+            val greeting = Greeting(randQuotation!!, "https://taskplanner-photos.s3.sa-east-1.amazonaws.com/$photoId.jpg")
             greeting.toGreetingResponse()
         }
     }
