@@ -57,7 +57,7 @@ class TaskListDao : DynamoDBDao("TaskLists") {
         }
     }
 
-    private fun getTaskListCount(taskListId: String): Int {
+    fun getTaskListCount(taskListId: String): Int {
         val attributeValues = mutableMapOf(":taskListId" to strAttributeValue(taskListId))
         val filterExpression = "taskListId = :taskListId"
 

@@ -31,7 +31,13 @@ class TaskDao : DynamoDBDao("Tasks") {
         task.id = task.id.takeIf { it.isNotBlank() } ?: newId()
 
         task.taskList?.let {
-            task.taskListId = taskListDao.create(it)?.id ?: ""
+            if (it.id.isNotBlank()){
+                task.position = taskListDao.getTaskListCount(it.id).toLong()
+                task.taskListId = it.id
+            }else {
+                task.position = 0
+                task.taskListId = taskListDao.create(it)?.id ?: ""
+            }
         }
 
         super.createOrUpdate(mapOf(
@@ -88,7 +94,9 @@ class TaskDao : DynamoDBDao("Tasks") {
             }
         }
 
-        return super.findByFilter(attributeValues, filterExpression).map(this::toTask)
+        val tasks = super.findByFilter(attributeValues, filterExpression).map(this::toTask)
+
+        return tasks.sortedByDescending { it?.position ?: 0L}
     }
 
     private fun toTask(item: Map<String, AttributeValue>?): Task?{
