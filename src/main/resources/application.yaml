@@ -16,11 +16,15 @@
   quarkus:
     swagger-ui:
       always-include=true:
+    http:
+      cors:
+        ~: true
+        origins: https://taskplannerweb.s3.sa-east-1.amazonaws.com
 
   aws:
     region: sa-east-1
     credentials:
       type: static
       static-provider:
-        access-key: YOUR_ADMIN_KEY
-        secret-access-key: YOUR_ADMIN_SECRET_ACCESS_KEY
+        access-key: YOUR_AWS_ACCESS_KEY
+        secret-access-key: YOUR_AWS_ACCESS_SECRET_KEY
