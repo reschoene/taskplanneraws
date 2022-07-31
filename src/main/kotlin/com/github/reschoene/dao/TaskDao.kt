@@ -31,13 +31,12 @@ class TaskDao : DynamoDBDao("Tasks") {
         task.id = task.id.takeIf { it.isNotBlank() } ?: newId()
 
         task.taskList?.let {
-            if (it.id.isNotBlank()){
+            if (it.id.isNotBlank())
                 task.position = taskListDao.getTaskListCount(it.id).toLong()
-                task.taskListId = it.id
-            }else {
+            else
                 task.position = 0
-                task.taskListId = taskListDao.create(it)?.id ?: ""
-            }
+
+            task.taskListId = taskListDao.create(it)?.id ?: ""
         }
 
         super.createOrUpdate(mapOf(
